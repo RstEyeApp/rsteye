@@ -2,6 +2,13 @@
   - An App to take digital break
   - An App to remind users to take breaks and relax their eyes while working on the computer.
 
+## General Info 
+
+  - What is the purpose behind this project?
+    
+    > This project aims to explore various build systems, computer architectures, and operating systems available across the internet. Additionally, it will open a GIF with deep breathing instructions every hour, covering your entire screen.
+
+
 ## Use 
 
   - Linux 
@@ -24,5 +31,11 @@
 ## TODO
 
  - [X] create deb packge for debian  
- - [] create dmg for mac 
- - [] create .exe for windows 
+ - [ ] create dmg for mac 
+ - [ ] create .exe for windows 
+
+  Significant Enhancements:
+
+ - [ ] Convert binary into a daemon binary, possibly placing it in init.d for Linux. Research equivalent solutions for Windows and macOS.
+ - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
+ - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll be utilizing multithreading for logging and dealing with daemon binaries.
