@@ -1,14 +1,24 @@
 import os
+import sys
 import threading
 import time
 import tkinter as tk
 from tkinter import Label, messagebox
-
 from PIL import Image, ImageTk, ImageSequence
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 class RstEyeApp:
     def __init__(self, image_path, interval=1800, fullscreen=False):
-        self.image_path = image_path
+        self.image_path = resource_path(image_path)
         self.interval = interval  
         self.fullscreen = fullscreen
         self.root = tk.Tk()
@@ -22,7 +32,7 @@ class RstEyeApp:
     def show_image(self):
         try:
             window = tk.Toplevel(self.root)
-            window.withdraw()  
+            window.withdraw()
             window.title("Take a Break")
 
             if self.fullscreen:
