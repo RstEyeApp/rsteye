@@ -4,15 +4,16 @@
 ## Use 
 
   - Linux 
-    download .deb file and run `sudo dpkg -i rsteye.deb`
+     - download .deb file and run `sudo dpkg -i rsteye.deb`
 
 ## Development 
 
   - Linux 
 
-    run below command to create a binary file for package it as deb package 
-    pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
-    create a deb package(`dpkg-deb --build deb_package`) after copying the binary to deb_package(rsteye) usr/bin and creating a control file  
+    - run below command to create a binary file for package it as deb package 
+      `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
+    
+    - create a deb package(`dpkg-deb --build deb_package`) after copying the binary to deb_package(rsteye) usr/bin and creating a control file  
 
   - Mac
 
