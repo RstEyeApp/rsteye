@@ -1,6 +1,7 @@
 # rsteye
-    An App to take digital break
-        An App to remind users to take breaks and relax their eyes while working on the computer.
+  - An App to take digital break
+  - An App to remind users to take breaks and relax their eyes while working on the computer.
+
 ## Use 
 
   - Linux 
