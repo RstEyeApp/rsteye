@@ -1,0 +1,10 @@
+[Unit]
+Description=RstEyeApp Daemon
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/RstEyeApp
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
