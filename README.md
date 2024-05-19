@@ -18,6 +18,10 @@
 
   - Linux 
 
+    - create virtual env and install dependencies 
+      - python3 -m venv .venv 
+      - python3 -m pip install pillow pyinstaller 
+
     - run below command to create a binary file for package it as deb package 
       `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
     
