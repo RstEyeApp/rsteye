@@ -36,6 +36,6 @@
 
   Significant Enhancements:
 
- - [ ] Convert binary into a daemon binary, possibly placing it in init.d for Linux. Research equivalent solutions for Windows and macOS.
+ - [X] Convert binary into a daemon binary, possibly placing it in init.d for Linux. Research equivalent solutions for Windows and macOS.
  - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
  - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll be utilizing multithreading for logging and dealing with daemon binaries.
