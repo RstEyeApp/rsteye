@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+# Stop and disable the service
+systemctl stop rsteyeapp.service
+systemctl disable rsteyeapp.service
+
+exit 0

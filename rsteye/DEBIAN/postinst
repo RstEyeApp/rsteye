@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+# Enable and start the service
+systemctl enable rsteyeapp.service
+systemctl start rsteyeapp.service
+
+exit 0

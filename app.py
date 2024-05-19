@@ -4,6 +4,7 @@ import threading
 import time
 import tkinter as tk
 from tkinter import Label, messagebox
+
 from PIL import Image, ImageTk, ImageSequence
 
 def resource_path(relative_path):
