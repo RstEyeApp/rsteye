@@ -13,6 +13,7 @@
 
   - Linux 
      - download .deb file and run `sudo dpkg -i rsteye.deb`
+     - then run `RstEyeApp` anywhere from your terminal 
 
 ## Development 
 
