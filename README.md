@@ -9,19 +9,51 @@
     > This project aims to explore various build systems, computer architectures, and operating systems available across the internet. Additionally, it will open a GIF with deep breathing instructions every hour, covering your entire screen.
 
 
-## Use 
+# Usage Instructions
 
-  - Linux 
-     - download .deb file and run `sudo dpkg -i rsteye.deb`
-     - then run `RstEyeApp` anywhere from your terminal 
+## Debian
 
-## Development 
+### Set Environment Variables
 
-  - Linux 
+  - `POPUP_DURATION`: This variable sets the duration for which you want the popup to appear. The default value is 60 seconds (1 minute). You must provide this value in seconds.
+
+  - `POPUP_INTERVAL`: This variable sets the interval after which you want the popup to appear. The default value is 60 minutes. You must provide this value in minutes.
+
+### Configure Environment Variables
+
+  Set these environment variables in your shell configuration files (e.g., `.bashrc` or `.zshrc`). For example:
+
+  ```sh
+  export POPUP_DURATION=30
+  export POPUP_INTERVAL=120
+  ```
+
+### Download and Install
+
+  Download the `.deb` file and install it by running:
+
+  ```sh
+  sudo dpkg -i rsteye.deb
+  ```
+
+### Run the Application
+
+  After installation, you can run `RstEyeApp` from any terminal:
+
+  ```sh
+  RstEyeApp
+  ```
+  or start the service using 
+  reload systemctl using `sudo systemctl daemon-reload` and then start the service `sudo systemctl start rsteyeapp.service`
+
+
+# Development 
+
+  - Debian 
 
     - create virtual env and install dependencies 
       - python3 -m venv .venv 
-      - python3 -m pip install pillow pyinstaller 
+      - python3 -m pip install pillow pyinstaller python-dotenv
 
     - run below command to create a binary file to package it as deb package 
       `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
@@ -33,7 +65,7 @@
   - Windows
 
 
-## TODO
+# TODO
 
  - [X] create deb packge for debian  
  - [ ] create dmg for mac 

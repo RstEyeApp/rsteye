@@ -7,6 +7,12 @@ from tkinter import Label, messagebox
 
 from PIL import Image, ImageTk, ImageSequence
 
+from dotenv import load_dotenv
+load_dotenv()
+
+POPUP_DURATION = os.getenv("POPUP_DURATION", 60)
+POPUP_INTERVAL = os.getenv("POPUP_INTERVAL", 60)
+
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
@@ -18,7 +24,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 class RstEyeApp:
-    def __init__(self, image_path, interval=1800, fullscreen=False):
+    def __init__(self, image_path, interval=POPUP_INTERVAL*60, fullscreen=False):
         self.image_path = resource_path(image_path)
         self.interval = interval  
         self.fullscreen = fullscreen
@@ -62,7 +68,7 @@ class RstEyeApp:
 
             window.after(0, update_frame, 0)
             window.deiconify()
-            window.after(60000, window.destroy)
+            window.after(POPUP_DURATION*1000, window.destroy)
 
         except Exception as e:
             messagebox.showerror("Error", f"Failed to load image: {e}")
