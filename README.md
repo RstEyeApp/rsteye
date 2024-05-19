@@ -22,7 +22,7 @@
       - python3 -m venv .venv 
       - python3 -m pip install pillow pyinstaller 
 
-    - run below command to create a binary file for package it as deb package 
+    - run below command to create a binary file to package it as deb package 
       `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
     
     - create a deb package(`dpkg-deb --build rsteye`) after copying the binary to deb_package(rsteye) usr/bin and creating a control file  
