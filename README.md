@@ -57,7 +57,7 @@
     - run below command to create a binary file to package it as deb package 
       `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
     
-    - create a deb package(`dpkg-deb --build rsteye`) after copying the binary to deb_package(rsteye) usr/bin and creating a DEBIAN files  
+    - create a deb package(`dpkg-deb --build rsteye`) after copying the binary to deb_package(rsteye) usr/bin and creating DEBIAN files  
 
   - Mac
 
