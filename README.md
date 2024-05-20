@@ -50,7 +50,8 @@
   - Debian 
 
     - create virtual env and install dependencies 
-      - python3 -m venv .venv 
+      - python3 -m venv .venv
+      - source .venv/bin/activate
       - python3 -m pip install pillow pyinstaller python-dotenv
 
     - run below command to create a binary file to package it as deb package 
