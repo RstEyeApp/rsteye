@@ -42,7 +42,7 @@
   
   you can use service file as well to start it in the background 
 
-  reload systemctl using `sudo systemctl daemon-reload` and then start the service `sudo systemctl start rsteyeapp.service`
+  reload systemctl using `sudo systemctl daemon-reload` and then start the service `sudo systemctl start rsteyeapp.service` (currently not working)
 
   *DO WAIT FOR FEW SEC(7-8) TO START*
 
