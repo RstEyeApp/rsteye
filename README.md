@@ -39,7 +39,9 @@
 ### Run the Application
 
   After installation, you can run `RstEyeApp` from any terminal:
-  or start the service using 
+  
+  you can service file as well to start it in the background 
+
   reload systemctl using `sudo systemctl daemon-reload` and then start the service `sudo systemctl start rsteyeapp.service`
 
 
