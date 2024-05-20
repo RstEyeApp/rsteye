@@ -44,6 +44,8 @@
 
   reload systemctl using `sudo systemctl daemon-reload` and then start the service `sudo systemctl start rsteyeapp.service`
 
+  *DO WAIT FOR FEW SEC(7-8) TO START*
+
 
 # Development 
 
