@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block title %}downloads{% endblock %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <h1>Download Links</h1>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Download for
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="{{ url_for('static', filename='downloads/rsteye.exe') }}" download>Windows</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('static', filename='downloads/rsteye.deb') }}" download>Linux</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('static', filename='downloads/rsteye.dmg') }}" download>Mac</a></li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
