@@ -38,7 +38,7 @@
 
 ### Run the Application
 
-  After installation, you can run `RstEyeApp` from any terminal:
+  After installation, you can run `RstEyeApp &` from any terminal:
   
   you can use service file as well to start it in the background 
 
