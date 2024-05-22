@@ -56,8 +56,3 @@ jobs:
         file: rsteye.deb
         asset_name: ${{ matrix.asset_name }}
         tag: ${{ github.ref }}
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: rsteye.deb
-        asset_name: ${{ matrix.asset_name }}
-        tag: ${{ github.ref }}
