@@ -45,14 +45,14 @@ jobs:
         echo "Section: base" >> rsteye/DEBIAN/control
         echo "Priority: optional" >> rsteye/DEBIAN/control
         echo "Architecture: amd64" >> rsteye/DEBIAN/control
-        echo "Maintainer: Prince Roshan <princekrroshan01@gmail.com> >> rsteye/DEBIAN/control
-        echo An App to remind users to take breaks and relax their eyes while working on the computer. >> rsteye/DEBIAN/control
+        echo "Maintainer: Prince Roshan <princekrroshan01@gmail.com>" >> rsteye/DEBIAN/control
+        echo "Description: An App to remind users to take breaks and relax their eyes while working on the computer." >> rsteye/DEBIAN/control
         dpkg-deb --build rsteye
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ${{ matrix.artifact_name }}
+        file: rsteye.deb
         asset_name: ${{ matrix.asset_name }}
         tag: ${{ github.ref }}
