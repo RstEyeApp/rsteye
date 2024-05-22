@@ -45,10 +45,9 @@ jobs:
         echo "Section: base" >> rsteye/DEBIAN/control
         echo "Priority: optional" >> rsteye/DEBIAN/control
         echo "Architecture: amd64" >> rsteye/DEBIAN/control
-        echo "Maintainer: Your Name <your.email@example.com>" >> rsteye/DEBIAN/control
-        echo "Description: RstEye Application" >> rsteye/DEBIAN/control
+        echo "Maintainer: Prince Roshan <princekrroshan01@gmail.com> >> rsteye/DEBIAN/control
+        echo An App to remind users to take breaks and relax their eyes while working on the computer. >> rsteye/DEBIAN/control
         dpkg-deb --build rsteye
-        mv rsteye.deb ${{ matrix.artifact_name }}
 
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
