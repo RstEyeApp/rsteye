@@ -14,7 +14,7 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact_name: rsteye.deb
-            asset_name: rsteye-linux
+            asset_name: rsteye.deb
 
     steps:
     - uses: actions/checkout@v3
