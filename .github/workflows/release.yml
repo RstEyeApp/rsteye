@@ -49,8 +49,13 @@ jobs:
         echo "Description: An App to remind users to take breaks and relax their eyes while working on the computer." >> rsteye/DEBIAN/control
         dpkg-deb --build rsteye
 
-    - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
+    - name: Upload files to a GitHub release
+      uses: svenstaro/upload-release-action@2.9.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: rsteye.deb
+        asset_name: ${{ matrix.asset_name }}
+        tag: ${{ github.ref }}
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: rsteye.deb
