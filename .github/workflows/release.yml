@@ -27,12 +27,12 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m venv .venv
-        source .venv/bin/activate
+        . .venv/bin/activate
         python3 -m pip install pillow pyinstaller python-dotenv
 
     - name: Build binary with PyInstaller
       run: |
-        source .venv/bin/activate
+        . .venv/bin/activate
         pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
 
     - name: Create Debian package
@@ -45,8 +45,8 @@ jobs:
         echo "Section: base" >> rsteye/DEBIAN/control
         echo "Priority: optional" >> rsteye/DEBIAN/control
         echo "Architecture: amd64" >> rsteye/DEBIAN/control
-        echo "Maintainer: Prince Roshan <princekrroshan01@gmail.com> >> rsteye/DEBIAN/control
-        echo An App to remind users to take breaks and relax their eyes while working on the computer. >> rsteye/DEBIAN/control
+        echo "Maintainer: Your Name <your.email@example.com>" >> rsteye/DEBIAN/control
+        echo "Description: RstEye Application" >> rsteye/DEBIAN/control
         dpkg-deb --build rsteye
         mv rsteye.deb ${{ matrix.artifact_name }}
 
