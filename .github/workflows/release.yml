@@ -14,69 +14,39 @@ jobs:
         include:
           - os: ubuntu-latest
             artifact_name: rsteye.deb
-            asset_name: rsteye.deb
+            asset_name: rsteye-linux
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Build Docker image
-      run: docker build -t rsteye-build .
+      run: |
+        docker build -t rsteye-build .
 
     - name: Create container and copy binary
       run: |
-        docker run --rm -v $(pwd):/host rsteye-build sh -c 'cp /app/dist/RstEyeApp /host/RstEyeApp'
+        mkdir -p output
+        docker create --name rsteye-container rsteye-build
+        docker cp rsteye-container:/output/RstEyeApp ./output/RstEyeApp
+        docker rm rsteye-container
 
-    - name: Generate systemd service file
-      run: |
-        cat > rsteye.service <<EOL
-        [Unit]
-        Description=RstEye Service
-        After=network.target
-
-        [Service]
-        Type=simple
-        ExecStart=/usr/bin/RstEyeApp
-        Restart=on-failure
-
-        [Install]
-        WantedBy=multi-user.target
-        EOL
-
-    - name: Create Debian package
+    - name: Create Debian package structure
       run: |
         mkdir -p rsteye/DEBIAN
         mkdir -p rsteye/usr/bin
         mkdir -p rsteye/lib/systemd/system
-        cp RstEyeApp rsteye/usr/bin/RstEyeApp
-        cp rsteye.service rsteye/lib/systemd/system/rsteye.service
-        cat > rsteye/DEBIAN/control <<EOL
-        Package: rsteye
-        Version: 1.0
-        Section: base
-        Priority: optional
-        Architecture: amd64
-        Maintainer: Prince Roshan <princekrroshan01@gmail.com>
-        Description: An App to remind users to take breaks and relax their eyes while working on the computer.
-        EOL
-        cat > rsteye/DEBIAN/postinst <<EOL
-        #!/bin/bash
-        set -e
-        systemctl enable rsteye.service
-        systemctl start rsteye.service
-        EOL
-        cat > rsteye/DEBIAN/postrm <<EOL
-        #!/bin/bash
-        set -e
-        systemctl stop rsteye.service
-        systemctl disable rsteye.service
-        EOL
+        cp output/RstEyeApp rsteye/usr/bin/RstEyeApp
+        cp debian_pkg_files/rsteye.service rsteye/lib/systemd/system/rsteye.service
+        cp debian_pkg_files/control rsteye/DEBIAN/control
+        cp debian_pkg_files/postinst rsteye/DEBIAN/postinst
+        cp debian_pkg_files/postrm rsteye/DEBIAN/postrm
         chmod 755 rsteye/DEBIAN/postinst
         chmod 755 rsteye/DEBIAN/postrm
         dpkg-deb --build rsteye
 
     - name: Upload files to a GitHub release
-      uses: svenstaro/upload-release-action@2.9.0
+      uses: svenstaro/upload-release-action@v2.9.0
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: rsteye.deb
