@@ -30,7 +30,9 @@
 
 ### Download and Install
 
-  Download the `.deb` file and install it by running:
+  Download the `.deb` file from one of the stable https://github.com/RstEyeApp/rsteye/releases/ 
+  
+  and install it by running:
 
   ```sh
   sudo dpkg -i rsteye.deb
