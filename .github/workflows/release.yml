@@ -21,22 +21,18 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Build Docker image
-      run: |
-        docker build -t rsteye-build .
+      run: docker build -t rsteye-build .
 
     - name: Create container and copy binary
       run: |
-        mkdir -p output
-        docker create --name rsteye-container rsteye-build
-        docker cp rsteye-container:/output/RstEyeApp ./output/RstEyeApp
-        docker rm rsteye-container
+        docker run --rm -v $(pwd):/host rsteye-build sh -c 'cp /app/dist/RstEyeApp /host/RstEyeApp'
 
-    - name: Create Debian package structure
+    - name: Create Debian package structure and build package
       run: |
         mkdir -p rsteye/DEBIAN
         mkdir -p rsteye/usr/bin
         mkdir -p rsteye/lib/systemd/system
-        cp output/RstEyeApp rsteye/usr/bin/RstEyeApp
+        cp RstEyeApp rsteye/usr/bin/RstEyeApp
         cp debian_pkg_files/rsteye.service rsteye/lib/systemd/system/rsteye.service
         cp debian_pkg_files/control rsteye/DEBIAN/control
         cp debian_pkg_files/postinst rsteye/DEBIAN/postinst
