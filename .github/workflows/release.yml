@@ -119,6 +119,6 @@ jobs:
       uses: svenstaro/upload-release-action@2.9.0
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: dist\Output\RstEyeInstaller.exe
+        file: dist\RstEyeInstaller.exe
         asset_name: RstEyeInstaller.exe
         tag: ${{ github.ref }}
