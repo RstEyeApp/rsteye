@@ -68,13 +68,27 @@
 
   - Mac
 
+   - Create Virtual Environment and Install Dependencies
+     - python3 -m venv .venv
+     - source .venv/bin/activate
+     - python3 -m pip install -r requirements.txt
+     - python3 -m pip install py2app 
+
+   - Then run 
+     - sed -i '' 's/from pkg_resources import packaging/import packaging/g' $(python -c "import py2app, os; print(os.path.dirname(py2app.__file__))")/recipes/matplotlib.py
+
+   - Build zip folder with app.app 
+     - python3 setup.py py2app
+     - zip -r RstEyeApp.zip dist/app.app
+
+
   - Windows
 
 
 # TODO
 
  - [X] create deb packge for debian  
- - [ ] create dmg for mac 
+ - [X] create zip for mac 
  - [ ] create .exe for windows 
 
   Significant Enhancements:
