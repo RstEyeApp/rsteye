@@ -6,16 +6,50 @@ on:
       - '*'
 
 jobs:
-  publish:
-    name: Publish for ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-            artifact_name: rsteye.deb
-            asset_name: rsteye.deb
+  publish-mac:
+    name: Publish for macOS
+    runs-on: macos-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
 
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Create virtual environment
+      run: python -m venv venv
+
+    - name: Activate virtual environment
+      run: source venv/bin/activate
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install py2app
+
+    - name: Replace import statement
+      run: |
+        sed -i '' 's/from pkg_resources import packaging/import packaging/g' $(python -c "import py2app, os; print(os.path.dirname(py2app.__file__))")/recipes/matplotlib.py
+
+    - name: Build py2app application
+      run: python setup.py py2app
+
+    - name: Zip the application
+      run: zip -r RstEyeApp.zip dist/app.app
+
+    - name: Upload files to a GitHub release
+      uses: svenstaro/upload-release-action@2.9.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: RstEyeApp.zip
+        asset_name: RstEyeApp.zip
+        tag: ${{ github.ref }}
+
+  publish-ubuntu:
+    name: Publish for Ubuntu
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -46,5 +80,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: rsteye.deb
-        asset_name: ${{ matrix.asset_name }}
+        asset_name: rsteye.deb
         tag: ${{ github.ref }}
