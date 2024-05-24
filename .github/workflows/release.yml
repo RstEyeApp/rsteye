@@ -19,33 +19,32 @@ jobs:
         python-version: '3.x'
 
     - name: Create virtual environment
-      run: python -m venv venv
+      run: python3 -m venv .venv
 
     - name: Activate virtual environment
-      run: source venv/bin/activate
+      run: source .venv/bin/activate
 
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
-        pip install py2app
+        python3 -m pip install pillow pyinstaller python-dotenv
 
-    - name: Replace import statement
+    - name: Replace import statement (if necessary)
       run: |
         sed -i '' 's/from pkg_resources import packaging/import packaging/g' $(python -c "import py2app, os; print(os.path.dirname(py2app.__file__))")/recipes/matplotlib.py
 
-    - name: Build py2app application
-      run: python setup.py py2app
+    - name: Build PyInstaller application
+      run: |
+        pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
 
     - name: Zip the application
-      run: zip -r RstEyeApp.zip dist/app.app
+      run: |
+        zip -r RstEyeApp.zip dist/RstEyeApp.app
 
-    - name: Upload files to a GitHub release
-      uses: svenstaro/upload-release-action@2.9.0
+    - name: Upload ZIP file to GitHub release
+      uses: actions/upload-artifact@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: RstEyeApp.zip
-        asset_name: RstEyeApp.zip
-        tag: ${{ github.ref }}
+        name: RstEyeApp
+        path: RstEyeApp.zip
 
   publish-ubuntu:
     name: Publish for Ubuntu

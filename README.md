@@ -71,15 +71,12 @@
    - Create Virtual Environment and Install Dependencies
      - python3 -m venv .venv
      - source .venv/bin/activate
-     - python3 -m pip install -r requirements.txt
-     - python3 -m pip install py2app 
+     - python3 -m pip install pillow pyinstaller python-dotenv
 
-   - Then run 
-     - sed -i '' 's/from pkg_resources import packaging/import packaging/g' $(python -c "import py2app, os; print(os.path.dirname(py2app.__file__))")/recipes/matplotlib.py
-
-   - Build zip folder with app.app 
-     - python3 setup.py py2app
-     - zip -r RstEyeApp.zip dist/app.app
+   - run 
+     `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
+   
+   - create zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
 
 
   - Windows
