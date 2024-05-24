@@ -112,7 +112,7 @@ jobs:
 
     - name: Create Inno Setup installer
       run: |
-        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" windows_pkg_file/setup.iss
+        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
 
     - name: Upload files to a GitHub release
       uses: svenstaro/upload-release-action@2.9.0
