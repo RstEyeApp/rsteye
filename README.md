@@ -68,15 +68,15 @@
 
   - Mac
 
-   - Create Virtual Environment and Install Dependencies
-     - python3 -m venv .venv
-     - source .venv/bin/activate
-     - python3 -m pip install pillow pyinstaller python-dotenv
-
-   - run 
-     `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
-   
-   - create zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
+     - Create Virtual Environment and Install Dependencies
+       - python3 -m venv .venv
+       - source .venv/bin/activate
+       - python3 -m pip install pillow pyinstaller python-dotenv
+  
+     - run 
+       `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
+     
+     - create zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
 
 
   - Windows
