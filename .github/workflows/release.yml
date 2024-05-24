@@ -109,10 +109,11 @@ jobs:
     - name: Install Inno Setup
       run: |
         choco install innosetup
-
+        
     - name: Create Inno Setup installer
+      shell: pwsh
       run: |
-        "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
+        & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
 
     - name: Upload files to a GitHub release
       uses: svenstaro/upload-release-action@2.9.0
