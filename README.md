@@ -92,7 +92,7 @@
         ```bash 
            pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
 
-    - Install innosetup for windows and run below command to generate an installer 
+    - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
       - "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
  
 
@@ -105,6 +105,6 @@
 
   Significant Enhancements:
 
- - [X] Convert binary into a daemon binary, create a service file for systemd.
+ - [X] Convert binary into a daemon binary, and create a service file for systemd.
  - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
- - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll be utilizing multithreading for logging and dealing with daemon binaries.
+ - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll utilize multithreading for logging and dealing with daemon binaries.
