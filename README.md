@@ -73,7 +73,7 @@
        - source .venv/bin/activate
        - python3 -m pip install pillow pyinstaller python-dotenv
   
-     - run 
+     - run
        `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
      
      - create a zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
@@ -89,6 +89,7 @@
     - Build PyInstaller Application
 
       - Run the following command to create a binary file:
+      
         `pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks --icon=rsteye.ico app.py`
 
     - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
