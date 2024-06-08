@@ -100,6 +100,13 @@
         # Build the installer package
         pkgbuild --root distroot --scripts mac_os_files --identifier com.rsteye.rsteye --version 1.0 RstEyeApp.pkg
 
+    - DEBUG 
+      - Check system logs:
+        - sudo launchctl list | grep com.rsteye.rsteye
+      - Check system logs:
+        - log show --predicate 'process =="RstEyeApp"' --info --last 1h
+
+
 
 
   - Windows
