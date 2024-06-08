@@ -65,7 +65,7 @@ class RstEyeApp:
 
             popup_label = Label(
                 popup,
-                text="An image is going to load in a few seconds...\nPlease wait.",
+                text="An image is going to load in a few seconds... \n with breathing exersise for 1 min\nPlease wait.",
                 font=("Helvetica", 12, "bold"),
                 wraplength=300,
             )
