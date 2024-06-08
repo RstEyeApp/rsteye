@@ -107,3 +107,18 @@
  - [X] Convert binary into a daemon binary, and create a service file for systemd.
  - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
  - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll utilize multithreading for logging and dealing with daemon binaries.
+
+
+# App Structure 
+
+sequenceDiagram
+    participant User
+    participant App
+    participant ImageLoader
+
+    User->>App: Clicks to load image
+    App->>User: Shows popup with new message
+    User->>App: Reads breathing exercise message
+    App->>ImageLoader: Requests image
+    ImageLoader->>App: Loads image
+    App->>User: Displays image
