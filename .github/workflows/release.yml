@@ -30,7 +30,7 @@ jobs:
 
     - name: Build PyInstaller application
       run: |
-        pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
+        pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
 
     - name: Zip the application
       run: |
