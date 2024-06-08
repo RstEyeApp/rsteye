@@ -68,28 +68,42 @@
 
   - Mac
 
-     - Create Virtual Environment and Install Dependencies
+     - Create a Virtual Environment and Install Dependencies
        - python3 -m venv .venv
        - source .venv/bin/activate
        - python3 -m pip install pillow pyinstaller python-dotenv
   
-     - run 
+     - run
        `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
      
-     - create zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
+     - create a zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
 
 
   - Windows
+
+    - Create Virtual Environment and Install Dependencies
+      - python -m venv .venv
+      - .\.venv\Scripts\activate
+      - python -m pip install pillow pyinstaller python-dotenv
+
+    - Build PyInstaller Application
+
+      - Run the following command to create a binary file:
+        `pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks --icon=rsteye.ico app.py`
+
+    - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
+      - "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
+ 
 
 
 # TODO
 
  - [X] create deb packge for debian  
  - [X] create zip for mac 
- - [ ] create .exe for windows 
+ - [X] Create installer for Windows 
 
   Significant Enhancements:
 
- - [X] Convert binary into a daemon binary, create service file for systemd. Research equivalent solutions for Windows and macOS.
+ - [X] Convert binary into a daemon binary, and create a service file for systemd.
  - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
- - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll be utilizing multithreading for logging and dealing with daemon binaries.
+ - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll utilize multithreading for logging and dealing with daemon binaries.
