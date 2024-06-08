@@ -84,21 +84,29 @@
         # Copy the .app file
         cp -R dist/RstEyeApp.app distroot/Applications/
 
-        # Create the postinstall script inside mac_os_files
-        cat <<EOF > mac_os_files/postinstall
-        #!/bin/bash
-        cp /Library/LaunchDaemons/com.rsteye.rsteye.plist
-        launchctl load /Library/LaunchDaemons/com.rsteye.rsteye.plist
-        EOF
+        # create scripts files  
+        Create postinstall, preinstall and user_input.applescript files 
 
-        # Make the postinstall script executable
-        chmod +x mac_os_files/postinstall
+        # Make the script files executable
+        chmod +x mac_os_files/scripts/* 
 
         # Ensure the plist file is ready and accessible in mac_os_files
         # Example: cp ./com.rsteye.rsteye.plist mac_os_files/
 
         # Build the installer package
-        pkgbuild --root distroot --scripts mac_os_files --identifier com.rsteye.rsteye --version 1.0 RstEyeApp.pkg
+        `pkgbuild --root dist/RstEyeApp.app \
+         --scripts mac_os_files/scripts \
+         --identifier com.rsteye.rsteye \
+         --version 1.0 \
+         --install-location /Applications/RstEyeApp \
+         mac_os_files/RstEyeApp.pkg`
+
+        # Final installer 
+        `productbuild --distribution mac_os_files/distribution.xml \
+             --resources mac_os_files/resources \
+             --package-path mac_os_files \
+             --version 1.0 \
+             RstEyeAppInstaller.pkg`
 
     - DEBUG 
       - Check system logs:
@@ -123,17 +131,4 @@
 
     - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
       - "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
- 
 
-
-# TODO
-
- - [X] create deb packge for debian  
- - [X] create zip for mac 
- - [X] Create installer for Windows 
-
-  Significant Enhancements:
-
- - [X] Convert binary into a daemon binary, and create a service file for systemd.
- - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
- - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll utilize multithreading for logging and dealing with daemon binaries.
