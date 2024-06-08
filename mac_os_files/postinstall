@@ -1,0 +1,3 @@
+#!/bin/bash
+cp com.rsteye.rsteye.plist /Library/LaunchDaemons/
+launchctl load /Library/LaunchDaemons/com.rsteye.rsteye.plist
