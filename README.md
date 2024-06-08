@@ -62,7 +62,7 @@
       - python3 -m pip install pillow pyinstaller python-dotenv
 
     - run below command to create a binary file to package it as deb package 
-      `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
+      `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
     
     - create a deb package(`dpkg-deb --build rsteye`) after copying the binary to deb_package(rsteye) usr/bin and creating DEBIAN files  
 
@@ -74,9 +74,32 @@
        - python3 -m pip install pillow pyinstaller python-dotenv
   
      - run
-       `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
+       `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`
      
-     - create a zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
+     - create installer fater following below instructions 
+        
+        - # Create the directory structure
+        mkdir -p distroot/Applications
+
+        # Copy the .app file
+        cp -R dist/RstEyeApp.app distroot/Applications/
+
+        # Create the postinstall script inside mac_os_files
+        cat <<EOF > mac_os_files/postinstall
+        #!/bin/bash
+        cp /Library/LaunchDaemons/com.rsteye.rsteye.plist
+        launchctl load /Library/LaunchDaemons/com.rsteye.rsteye.plist
+        EOF
+
+        # Make the postinstall script executable
+        chmod +x mac_os_files/postinstall
+
+        # Ensure the plist file is ready and accessible in mac_os_files
+        # Example: cp ./com.rsteye.rsteye.plist mac_os_files/
+
+        # Build the installer package
+        pkgbuild --root distroot --scripts mac_os_files --identifier com.rsteye.rsteye --version 1.0 RstEyeApp.pkg
+
 
 
   - Windows
@@ -89,7 +112,7 @@
     - Build PyInstaller Application
 
       - Run the following command to create a binary file:
-        `pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks --icon=rsteye.ico app.py`
+        `pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks --icon=rsteye.ico app.py`
 
     - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
       - "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
