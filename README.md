@@ -82,19 +82,24 @@
         mkdir -p distroot/Applications
 
         - Copy the .app file
-        cp -R dist/RstEyeApp.app distroot/Applications/
+          
+            cp -R dist/RstEyeApp.app distroot/Applications/
 
-        - Create scripts files  
-        Create postinstall, preinstall and user_input.applescript files 
+        - Create scripts files
+       
+            Create postinstall, preinstall and user_input.applescript files 
 
         - Make the script files executable
-        chmod +x mac_os_files/scripts/* 
+        
+            chmod +x mac_os_files/scripts/* 
 
         - Ensure the plist file is ready and accessible in mac_os_files
-        Example: cp ./com.rsteye.rsteye.plist mac_os_files/
+
+            Example: cp ./com.rsteye.rsteye.plist mac_os_files/
 
         - Build the installer package
-        `pkgbuild --root dist/RstEyeApp.app \
+
+            `pkgbuild --root dist/RstEyeApp.app \
          --scripts mac_os_files/scripts \
          --identifier com.rsteye.rsteye \
          --version 1.0 \
@@ -102,7 +107,8 @@
          mac_os_files/RstEyeApp.pkg`
 
         - Final installer 
-        `productbuild --distribution mac_os_files/distribution.xml \
+        
+          `productbuild --distribution mac_os_files/distribution.xml \
              --resources mac_os_files/resources \
              --package-path mac_os_files \
              --version 1.0 \
