@@ -115,8 +115,6 @@
         - log show --predicate 'process =="RstEyeApp"' --info --last 1h
 
 
-
-
   - Windows
 
     - Create Virtual Environment and Install Dependencies
@@ -132,3 +130,18 @@
     - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
       - "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
 
+
+# App Structure 
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant App
+    participant ImageLoader
+
+    User->>App: Clicks to load image
+    App->>User: Shows popup with new message
+    User->>App: Reads breathing exercise message
+    App->>ImageLoader: Requests image
+    ImageLoader->>App: Loads image
+    App->>User: Displays image
