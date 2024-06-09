@@ -23,4 +23,4 @@ COPY . /app
 WORKDIR /app
 
 # Build the binary
-RUN pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
+RUN pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py

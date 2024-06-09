@@ -62,7 +62,7 @@
       - python3 -m pip install pillow pyinstaller python-dotenv
 
     - run below command to create a binary file to package it as deb package 
-      `pyinstaller --name RstEyeApp --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
+      `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`    
     
     - create a deb package(`dpkg-deb --build rsteye`) after copying the binary to deb_package(rsteye) usr/bin and creating DEBIAN files  
 
@@ -74,9 +74,45 @@
        - python3 -m pip install pillow pyinstaller python-dotenv
   
      - run
-       `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py` 
+       `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`
      
-     - create a zip file using `zip -r RstEyeApp.zip dist/RstEyeApp.app`
+     - create installer fater following below instructions 
+        
+        - # Create the directory structure
+        mkdir -p distroot/Applications
+
+        # Copy the .app file
+        cp -R dist/RstEyeApp.app distroot/Applications/
+
+        # create scripts files  
+        Create postinstall, preinstall and user_input.applescript files 
+
+        # Make the script files executable
+        chmod +x mac_os_files/scripts/* 
+
+        # Ensure the plist file is ready and accessible in mac_os_files
+        # Example: cp ./com.rsteye.rsteye.plist mac_os_files/
+
+        # Build the installer package
+        `pkgbuild --root dist/RstEyeApp.app \
+         --scripts mac_os_files/scripts \
+         --identifier com.rsteye.rsteye \
+         --version 1.0 \
+         --install-location /Applications/RstEyeApp \
+         mac_os_files/RstEyeApp.pkg`
+
+        # Final installer 
+        `productbuild --distribution mac_os_files/distribution.xml \
+             --resources mac_os_files/resources \
+             --package-path mac_os_files \
+             --version 1.0 \
+             RstEyeAppInstaller.pkg`
+
+    - DEBUG 
+      - Check system logs:
+        - sudo launchctl list | grep com.rsteye.rsteye
+      - Check system logs:
+        - log show --predicate 'process =="RstEyeApp"' --info --last 1h
 
 
   - Windows
@@ -89,24 +125,10 @@
     - Build PyInstaller Application
 
       - Run the following command to create a binary file:
-        `pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks --icon=rsteye.ico app.py`
+        `pyinstaller --name RstEyeApp --onefile --add-data "med.gif;." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks --icon=rsteye.ico app.py`
 
     - Install Inno setup(https://jrsoftware.org/isdl.php#stable) for windows and run below command to generate an installer 
       - "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" setup.iss
- 
-
-
-# TODO
-
- - [X] create deb packge for debian  
- - [X] create zip for mac 
- - [X] Create installer for Windows 
-
-  Significant Enhancements:
-
- - [X] Convert binary into a daemon binary, and create a service file for systemd.
- - [ ] Implement logging functionality and enable users to close the window. If the user closes it for over 3 hours, display a message emphasizing its  importance.
- - [ ] Consider rewriting the entire application in C++ for improved performance, especially since we'll utilize multithreading for logging and dealing with daemon binaries.
 
 
 # App Structure 

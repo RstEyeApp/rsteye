@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Copy and load the main plist file
+cp mac_os_files/com.rsteye.rsteye.plist /Library/LaunchDaemons/
+launchctl load /Library/LaunchDaemons/com.rsteye.rsteye.plist
+
+exit 0
