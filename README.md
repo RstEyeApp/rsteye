@@ -76,24 +76,24 @@
      - run
        `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`
      
-     - create installer fater following below instructions 
+     - create installer after following below instructions 
         
-        - # Create the directory structure
+        ### Create the directory structure
         mkdir -p distroot/Applications
 
-        # Copy the .app file
+        ### Copy the .app file
         cp -R dist/RstEyeApp.app distroot/Applications/
 
-        # create scripts files  
+        ### Create scripts files  
         Create postinstall, preinstall and user_input.applescript files 
 
-        # Make the script files executable
+        ### Make the script files executable
         chmod +x mac_os_files/scripts/* 
 
-        # Ensure the plist file is ready and accessible in mac_os_files
-        # Example: cp ./com.rsteye.rsteye.plist mac_os_files/
+        ### Ensure the plist file is ready and accessible in mac_os_files
+        Example: cp ./com.rsteye.rsteye.plist mac_os_files/
 
-        # Build the installer package
+        ### Build the installer package
         `pkgbuild --root dist/RstEyeApp.app \
          --scripts mac_os_files/scripts \
          --identifier com.rsteye.rsteye \
@@ -101,7 +101,7 @@
          --install-location /Applications/RstEyeApp \
          mac_os_files/RstEyeApp.pkg`
 
-        # Final installer 
+        ### Final installer 
         `productbuild --distribution mac_os_files/distribution.xml \
              --resources mac_os_files/resources \
              --package-path mac_os_files \
