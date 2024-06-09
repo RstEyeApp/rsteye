@@ -5,7 +5,7 @@ cp "com.rsteye.rsteye.plist" /Library/LaunchDaemons/
 launchctl load "/Library/LaunchDaemons/com.rsteye.rsteye.plist"
 
 # Start the service
-launchctl start "/Library/LaunchDaemons/com.rsteye.rsteye.plist"
+launchctl start "com.rsteye.rsteye"
 
 # Exit with success
 exit 0
