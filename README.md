@@ -114,6 +114,13 @@
       - Check system logs:
         - log show --predicate 'process =="RstEyeApp"' --info --last 1h
 
+    - Uninstall 
+      - sudo launchctl unload /Library/LaunchDaemons/com.rsteye.rsteye.plist
+      - sudo launchctl unload /Library/LaunchDaemons/com.rsteye.env.plist
+      - sudo rm /Library/LaunchDaemons/com.rsteye.rsteye.plist
+      - sudo rm /Library/LaunchDaemons/com.rsteye.env.plist
+
+
 
   - Windows
 

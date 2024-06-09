@@ -43,4 +43,9 @@ EOF
 # Load the plist to set the environment variables
 launchctl load /Library/LaunchDaemons/com.rsteye.env.plist
 
-exit 0
+launchctl start com.rsteye.env
+
+# Remove the temporary files
+rm /tmp/POPUP_INTERVAL
+rm /tmp/POPUP_DURATION
+

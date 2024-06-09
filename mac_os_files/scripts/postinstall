@@ -1,7 +1,11 @@
-#!/bin/bash
+# Copy the plist file to /Library/LaunchDaemons
+cp "com.rsteye.rsteye.plist" /Library/LaunchDaemons/
 
-# Copy and load the main plist file
-cp mac_os_files/com.rsteye.rsteye.plist /Library/LaunchDaemons/
-launchctl load /Library/LaunchDaemons/com.rsteye.rsteye.plist
+# Load the plist file using launchctl
+launchctl load "/Library/LaunchDaemons/com.rsteye.rsteye.plist"
 
+# Start the service
+launchctl start "/Library/LaunchDaemons/com.rsteye.rsteye.plist"
+
+# Exit with success
 exit 0

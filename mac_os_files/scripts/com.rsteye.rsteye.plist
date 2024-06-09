@@ -6,7 +6,7 @@
     <string>com.rsteye.rsteye</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Applications/RstEyeApp.app/Contents/MacOS/RstEyeApp</string>
+        <string>/Applications/RstEyeApp/Contents/MacOS/RstEyeApp</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
