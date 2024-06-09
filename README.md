@@ -111,6 +111,7 @@
 
 # App Structure 
 
+```mermaid
 sequenceDiagram
     participant User
     participant App
