@@ -32,16 +32,24 @@ jobs:
       run: |
         pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py
 
-    - name: Zip the application
+    - name: Create initial PKG structure
       run: |
-        zip -r RstEyeApp.zip dist/RstEyeApp.app
+        pkgbuild --root dist/RstEyeApp.app  --scripts mac_os_files/scripts   --identifier com.rsteye.rsteye --version 1.0   --install-location /Applications/RstEyeApp   mac_os_files/RstEyeApp.pkg
 
+    # - name: Sign PKG
+    #   run: |
+    #     codesign --deep -s - --options runtime --timestamp --entitlements mac_os_files/entitlements.plist mac_os_files/RstEyeApp.pkg
+    
+    - name: Create Final Installer
+      run: |
+        productbuild --distribution mac_os_files/distribution.xml --resources mac_os_files/resources --package-path mac_os_files --version 1.0 RstEyeAppInstaller.pkg
+        
     - name: Upload files to a GitHub release
       uses: svenstaro/upload-release-action@2.9.0
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: RstEyeApp.zip
-        asset_name: RstEyeApp.zip
+        file: RstEyeAppInstaller.pkg
+        asset_name: RstEyeAppInstaller.pkg
         tag: ${{ github.ref }}
 
   publish-ubuntu:
