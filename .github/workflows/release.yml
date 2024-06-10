@@ -48,8 +48,8 @@ jobs:
       uses: svenstaro/upload-release-action@2.9.0
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: RstEyeApp.zip
-        asset_name: RstEyeApp.zip
+        file: RstEyeAppInstaller.pkg
+        asset_name: RstEyeAppInstaller.pkg
         tag: ${{ github.ref }}
 
   publish-ubuntu:
