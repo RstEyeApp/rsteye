@@ -77,14 +77,6 @@
        `pyinstaller --name RstEyeApp --windowed --onefile --add-data "med.gif:." --add-data "rsteye.png:." --hidden-import=PIL.ImageTk --additional-hooks-dir=hooks app.py`
      
      - create an installer after following the below instructions 
-        
-        - Create the directory structure
-
-            mkdir -p distroot/Applications
-
-        - Copy the .app file
-          
-            cp -R dist/RstEyeApp.app distroot/Applications/
 
         - Create scripts files
        
